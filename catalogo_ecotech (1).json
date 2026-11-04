@@ -1,0 +1,24 @@
+[
+    {
+        "tipo": "PanelSolar",
+        "nombre": "SunPower X400",
+        "precio": 185000.5,
+        "stock": 25,
+        "potencia_w": 400,
+        "eficiencia": 22.8
+    },
+    {
+        "tipo": "PanelSolar",
+        "nombre": "EcoPanel Mono 550",
+        "precio": 242500.0,
+        "stock": 12,
+        "potencia_w": 550,
+        "eficiencia": 21.5
+    },
+    {
+        "tipo": "DispositivoEcológico",
+        "nombre": "Cargador solar portátil",
+        "precio": 38900.0,
+        "stock": 40
+    }
+]

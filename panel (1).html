@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Sustentabilidad - EcoTech</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; background: #f2f7f2; color: #222; margin: 0; padding: 24px; }
+        .contenedor { max-width: 820px; margin: 0 auto; }
+        h1 { color: #2e7d32; margin-bottom: 4px; }
+        .subtitulo { color: #555; margin-top: 0; }
+        .tarjetas { display: flex; gap: 16px; flex-wrap: wrap; margin: 20px 0; }
+        .tarjeta { flex: 1; min-width: 220px; background: #fff; border-left: 6px solid #2e7d32; border-radius: 6px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+        .tarjeta .etiqueta { font-size: 13px; color: #666; text-transform: uppercase; }
+        .tarjeta .valor { font-size: 26px; font-weight: bold; margin-top: 6px; }
+        table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e0e0e0; }
+        th { background: #2e7d32; color: #fff; }
+        td.num, th.num { text-align: right; }
+        tr.destacada { background: #e8f5e9; font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="contenedor">
+    <h1>Panel de Sustentabilidad</h1>
+    <p class="subtitulo">Consumo energético y emisiones de carbono por planta</p>
+
+    <div class="tarjetas">
+        <div class="tarjeta">
+            <div class="etiqueta">Emisiones globales totales</div>
+            <div class="valor">{{ emisiones_totales|floatformat:2 }} kg CO₂</div>
+        </div>
+        <div class="tarjeta">
+            <div class="etiqueta">Planta con mayor consumo</div>
+            <div class="valor">{{ planta_mayor_consumo|default:"Sin datos" }}</div>
+        </div>
+    </div>
+
+    <h2>Detalle por planta</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Planta</th>
+                <th class="num">Consumo (kWh)</th>
+                <th class="num">Emisiones (kg CO₂)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fila in detalle_plantas %}
+            <tr{% if fila.planta == planta_mayor_consumo %} class="destacada"{% endif %}>
+                <td>{{ fila.planta }}</td>
+                <td class="num">{{ fila.consumo_kwh|floatformat:2 }}</td>
+                <td class="num">{{ fila.emisiones|floatformat:2 }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3">No hay registros de consumo.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
